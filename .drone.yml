@@ -8,7 +8,7 @@ build:
 publish:
   docker:
     registry: $$DOCKER_HUB
-    repo: angular_app
+    repo: $$DOCKER_HUB/angular_app
     username: $$DOCKER_PRIVATE_USERNAME
     password: $$DOCKER_PRIVATE_PW
     email: $$DOCKER_PRIVATE_EMAIL
