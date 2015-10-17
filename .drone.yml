@@ -5,6 +5,13 @@ build:
     - npm install --cache /tmp/npm && bower install --allow-root --config.storage.packages=/tmp/bower
     - gulp build
 
+cache:
+  mount:
+    - node_modules
+    - .git
+    - /tmp/npm
+    - /tmp/bower
+
 publish:
   docker:
     registry: $$DOCKER_HUB
