@@ -11,7 +11,7 @@ script:
 
 publish:
   docker:
-    docker_host: tcp://172.16.1.1:2375
+    docker_host: $$DOCKER_HOST
     registry_login_url: $$DOCKER_HUB
     image_name: $$DOCKER_HUB/angular_app
     username: $$DOCKER_PRIVATE_USERNAME
