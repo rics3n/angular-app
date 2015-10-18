@@ -1,8 +1,7 @@
 build:
   image: rics3n/angular:latest
   commands:
-    - npm config set cache .npm --global
-    - npm install --cache .npm && bower install --allow-root --config.storage.packages=.bower
+    - npm install && bower install --allow-root
     - gulp build
 
 cache:
@@ -10,8 +9,6 @@ cache:
     - node_modules
     - .git
     - bower_components
-    - .bower
-    - .npm
 
 publish:
   rics3n_docker:
