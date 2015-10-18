@@ -5,6 +5,12 @@ build:
     - npm install --cache /tmp/npm && bower install --allow-root --config.storage.packages=/tmp/bower
     - gulp build
 
+cache:
+  mount:
+    - node_modules
+    - .git
+    - bower_components
+
 publish:
   rics3n_docker:
     image: rics3n/drone-docker:latest
