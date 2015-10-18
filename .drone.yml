@@ -6,11 +6,20 @@ build:
     - gulp build
 
 publish:
-  docker:
-    image: rics3n/drone_docker
+  docker_fixed:
     registry: $$DOCKER_HUB
     repo: $$DOCKER_HUB/angular_app
     username: $$DOCKER_PRIVATE_USERNAME
     password: $$DOCKER_PRIVATE_PW
     email: $$DOCKER_PRIVATE_EMAIL
     insecure: true
+
+
+plugin:
+  name: docker fixed
+  desc: Syncs a directory with an Amason S3 Bucket
+  type: publish
+  image: rics3n/drone-docker
+  labels:
+    - publish
+    - docker
