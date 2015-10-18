@@ -1,3 +1,14 @@
+Run the app
+===========
+
+```
+docker run --name angular-app -d -p 9000:80 REGISTRY/angular_app:latest
+```
+
+Test Publish Container
+======================
+
+```
 docker run -i --privileged -v $(pwd):/drone/src plugins/drone-docker <<EOF
 {
     "workspace": {
@@ -22,3 +33,4 @@ docker run -i --privileged -v $(pwd):/drone/src plugins/drone-docker <<EOF
     }
 }
 EOF
+```
