@@ -19,4 +19,17 @@ publish:
     username: $$DOCKER_PRIVATE_USERNAME
     password: $$DOCKER_PRIVATE_PW
     email: $$DOCKER_PRIVATE_EMAIL
-    insecure: true
+    tag: stage_$(git rev-parse --short HEAD)
+    when:
+      branch: stage
+
+  rics3n_docker:
+    image: rics3n/drone-docker:latest
+    privileged: true
+    registry: $$DOCKER_HUB
+    repo: $$DOCKER_HUB/angular_app
+    username: $$DOCKER_PRIVATE_USERNAME
+    password: $$DOCKER_PRIVATE_PW
+    email: $$DOCKER_PRIVATE_EMAIL
+    when:
+      branch: master
