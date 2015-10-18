@@ -7,7 +7,7 @@ build:
 
 publish:
   docker:
-    image: "rics3n/drone-docker"
+    image: rics3n/drone_docker
     registry: $$DOCKER_HUB
     repo: $$DOCKER_HUB/angular_app
     username: $$DOCKER_PRIVATE_USERNAME
