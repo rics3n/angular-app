@@ -6,7 +6,7 @@ build:
     - gulp build
 
 publish:
-  rics3n/docker:
+  docker:
     registry: $$DOCKER_HUB
     repo: $$DOCKER_HUB/angular_app
     username: $$DOCKER_PRIVATE_USERNAME
