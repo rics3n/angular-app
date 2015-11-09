@@ -2,7 +2,7 @@ Run the app
 ===========
 
 ```
-docker run --name angular-app -d -p 9000:80 REGISTRY/angular_app:latest
+docker run --name angular-app -d -p 9000:80 dean.tploy.de:5000/angular_app:latest
 ```
 
 Test Publish Container

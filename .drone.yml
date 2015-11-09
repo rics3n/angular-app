@@ -11,9 +11,7 @@ cache:
     - bower_components
 
 publish:
-  rics3n_docker:
-    image: rics3n/drone-docker:latest
-    privileged: true
+  docker:
     registry: $$DOCKER_HUB
     repo: $$DOCKER_HUB/angular_app
     username: $$DOCKER_PRIVATE_USERNAME
@@ -24,9 +22,7 @@ publish:
     when:
       branch: stage
 
-  rics3n_docker:
-    image: rics3n/drone-docker:latest
-    privileged: true
+  docker:
     registry: $$DOCKER_HUB
     repo: $$DOCKER_HUB/angular_app
     username: $$DOCKER_PRIVATE_USERNAME
