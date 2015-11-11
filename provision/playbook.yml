@@ -1,0 +1,37 @@
+---
+- hosts: testserver
+  remote_user: deploy
+  sudo: yes
+  tasks:
+  - name: ensure docker is running
+    service: name=docker state=started
+  - name: now download the image
+    shell: docker pull dockerhub.rethinkit.de/tploy_frontend
+  - name: Get release timestamp
+    command: date +%Y%m%d%H%M%S
+    register: timestamp
+  - name: remove all old tploy frontend deploys
+    shell: docker ps | grep 'tploy_frontend' | awk '{print $1}' | xargs -r docker stop
+  - name: add tploy frontend
+    shell: >
+      docker run -d -p 80
+      -e SERVICE_NAME=tploy-frontend
+      -e SERVICE_TAGS=www,nginx,staging
+      -e SERVICE_VERSION={{ timestamp.stdout }}
+      --name tploy_frontend_{{ timestamp.stdout }}
+      dockerhub.rethinkit.de/tploy_frontend:latest
+  - name: change active to new tploy_frontend version
+    lineinfile: >
+      dest=/etc/environment
+      state=present
+      regexp='TPLOY_FRONTEND_ACTIVE=tploy_frontend_\w'
+      line='TPLOY_FRONTEND_ACTIVE=tploy_frontend_{{ timestamp.stdout }}'
+  - name: keep only last two containers
+    shell: docker ps -a --before {{ ansible_env.TPLOY_FRONTEND_PASSIVE }} | grep 'tploy_frontend_' | awk '{print $1}' | xargs -r docker rm
+    when: "'TPLOY_FRONTEND_PASSIVE' in ansible_env"
+  - name: change old active to passive tploy_frontend version
+    lineinfile: >
+      dest=/etc/environment
+      state=present
+      regexp='TPLOY_FRONTEND_PASSIVE=tploy_frontend_\w'
+      line='TPLOY_FRONTEND_PASSIVE={{ ansible_env.TPLOY_FRONTEND_ACTIVE | default('') }}'
